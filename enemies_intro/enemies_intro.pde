@@ -1,12 +1,14 @@
 //to do
 //add a siz PVector and use it to make the size of the ellipses
-//
-
-
+//change the speed to a vel pvector
+//change the PVector array to a PVector array list
 
 int numCircles = 10;
 
 PVector[] pos = new PVector[numCircles];
+ArrayList<PVector> pList = new ArrayList<PVector>();
+
+PVector[] siz = new PVector[numCircles];
 
 float speed = -6;
 
@@ -16,25 +18,26 @@ void setup(){
   for(int i = 0;i < numCircles; i++){
 
     pos[i] = new PVector(width + 150 + i*300, height*0.8);
+    siz[i] = new PVector(50+random(0, 150),50+random(0, 150));
   }
 }
 
 
 void draw(){
   background(0);
-  //for(PVector p : pos){
-  for(int i = 0;i < numCircles; i++){ 
-    PVector p = pos[i];
+   
+  for(int i = 0; i < numCircles; i++){ 
+    //PVector p = pos[i];
   //update
+    pos[i].x += speed;
 
-    p.x += speed;
   //check
 
-    if(p.x < -150){
-      p.x = width + 150;
+    if(pos[i].x < -siz[i].x/2){
+      pos[i].x = width + siz[i].x/2;//radius of the ellipse
     }
-  //draw
 
-    ellipse(p.x,p.y, 100, 100);
+  //draw
+    ellipse(pos[i].x,pos[i].y, siz[i].x, siz[i].y);
   }
 }
